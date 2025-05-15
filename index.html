@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLEX</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            background-size: cover;
+            animation: slideBackground 15s infinite;
+            animation-timing-function: linear;
+        }
+        @keyframes slideBackground {
+            0%, 100% { background-image: url(https://flexclinic.org.zw/sitepad-data/uploads/2022/10/CompressJPEG.Online_50kb_33030.jpg); }
+            33% { background-image: url(https://flexclinic.org.zw/sitepad-data/uploads/2022/10/CompressJPEG.Online_50kb_41564.jpg); }
+            66% { background-image: url(https://flexclinic.org.zw/sitepad-data/uploads/2022/10/CompressJPEG.Online_50kb_33842.jpg); }
+        }
+
+        h1 {
+            color: #1a202c;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1001;
+            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-brand {
+            color: #1a202c;
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+
+        .navbar-toggle {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 24px;
+            justify-content: space-between;
+            width: 30px;
+        }
+
+        .navbar-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background-color: #4a5568;
+            border-radius: 3px;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-toggle.active .bar:nth-child(1) {
+            transform: rotate(45deg) translateY(10px);
+        }
+
+        .navbar-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .navbar-toggle.active .bar:nth-child(3) {
+            transform: rotate(-45deg) translateY(-10px);
+        }
+
+        /* Logo styles */
+        .logo {
+            max-height: 50px;
+            margin-right: 10px;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #00336688;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        .header img {
+            max-height: 80px;
+        }
+
+        /* Content Area Styles */
+        .content-area {
+            margin-top: 0;
+        }
+
+        .wel {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .wel h2 {
+            font-size: 2rem;
+            color: #0d3111;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .sub-text2 {
+            font-size: 1.1rem;
+            color: #1400f4;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            text-align: center;
+            padding: 0 10%;
+        }
+.login-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 0.75rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .login-btn:hover {
+            background-color: #0056b3;
+        }
+        .map-container {
+            width: 100%;
+            height: 400px;
+            margin-bottom: 2rem;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .footer-hashen {
+            background-color: #e9ecef8c;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #555;
+            border-top: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+            margin-bottom: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>FULL LIFE EXPECTANCY</h1>
+        <img src="https://dcassetcdn.com/design_img/3825117/831606/23801150/mng17xdb40ktfwmzp66nxpyz01_image.jpg" alt="Company Logo">
+        <p>Through Quality Healthcare</p>
+    </header>
+
+    <nav class="navbar">
+        <button class="navbar-toggle" id="sidebar-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <a href="index.html">
+        <img src="img/Flex-Logo-2.png" alt="Company Logo" class="logo"></a>
+        <span class="navbar-brand"><div>
+             <a href="patient.html" class="nav-item">MAKE AN APPOINTMENT  |</a>
+                <a href="staff.html" class="nav-item">STAFF  |</a>
+                <a href="adminlogin.html" class="nav-item">ADMIN  |</a>
+                
+            </div></span>
+    </nav>
+      <div class="wel">
+            <h2 class="heading-text">WELCOME TO FLEX HEALTH APPOINTMENT PORTAL.....</h2>
+        </div>
+<div>
+            <p class="sub-text2">
+                How is health today, Sounds like not good!<br>
+                Don't worry. Find your doctor online Book as you wish with eDoc.<br>
+                We offer you a free doctor channeling service, Make your appointment now.
+            </p>
+        </div>
+<div>
+            <center>
+                <a href="patient.html">
+                    <button type="button" class="login-btn">PATIENTS</button>
+                </a>
+            </center>
+        </div>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.141724891138!2d29.441548825121376!3d-20.12154278186415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1eb5f2b7b1b9b3b1%3A0xbaa96544071f992c!2sLobengula%2C%20Bulawayo!5e0!3m2!1sen!2szw!4v1692708362444!5m2!1sen!2szw"
+                style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    
+        <p class="footer-hashen ">
+            Flex Clinic is a private multi-departmental medical centre uniquely located in high density suburb of Lobengula.<br>
+            Currently, the clinic is ready to serve with 40 fully equipped beds<br>
+            which can be increased to a maximum capacity of 80 beds
+        </p>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    
+</body>
+</html>

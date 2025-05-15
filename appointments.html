@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Details Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/indx.css">
+    <style>
+        body {
+            background-color: #f0f2f5; /* Soft background color */
+            font-family: 'Inter', sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: #fefeff; /* Darker heading color */
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        
+
+        #welcome-message {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            color: #1a5235;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease, pulse 2s infinite alternate;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes pulse {
+          from { transform: scale(1); }
+          to { transform: scale(1.04); }
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.8); /* Glassmorphism effect - more subtle*/
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+            margin-bottom: 40px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Add a border */
+        }
+.navbar .logo {
+  height: auto; /* Maintain aspect ratio */
+  max-width: 100%; /* Ensure it doesn't exceed the navbar width */
+  width: auto; /* Adjust width automatically based on height */
+}
+
+/* Optional: Add some padding or margins around the logo */
+.navbar a {
+  display: flex; /* To center the logo vertically and horizontally (if needed) */
+  align-items: center;
+  /* justify-content: center; */ /* Uncomment to center horizontally */
+  padding: 10px; /* Adjust as needed */
+}
+
+/* Further adjustments for different screen sizes (responsive design) */
+@media (max-width: 768px) {
+  .navbar .logo {
+    max-height: 50px; /* Adjust for smaller screens */
+  }
+}
+
+@media (min-width: 1200px) {
+  .navbar .logo {
+    max-height: 75px; /* Adjust for larger screens */
+  }
+}
+        form:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: #34495e; /* Darker label color */
+            margin-bottom: 8px;
+            display: block; /* Ensure label takes full width */
+            transition: color 0.3s ease;
+        }
+        .form-group label:hover{
+           color: #2c3e50;
+        }
+
+        .form-control {
+            border-radius: 6px;
+            border: 2px solid #bdc3c7; /* Style the border */
+            padding: 12px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1rem;
+            background-color: #ffffff; /* Ensure input background is white */
+            color: #2c3e50;
+        }
+
+        .form-control:focus {
+            border-color: #4299e1; /* Highlight border on focus */
+            outline: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Add shadow on focus */
+        }
+         .form-control::placeholder {
+            color: #95a5a6;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            background-color: #4299e1; /* Brighter button color */
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        }
+
+        button[type="submit"]:hover {
+            background-color: #3182ce; /* Darker shade on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
+        }
+          button[type="submit"]:active {
+             transform: translateY(0);
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-tabs {
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 30px;
+        }
+
+        .nav-tabs .nav-item {
+            margin-right: 8px;
+        }
+
+        .nav-tabs .nav-item .nav-link {
+            background-color: rgba(255, 255, 255, 0.7); /* Lighter tab background */
+            border: none;
+            border-radius: 6px 6px 0 0;
+            color: #2c3e50; /* Darker tab text */
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-tabs .nav-item .nav-link:hover {
+            background-color: #edf2f7; /* Slightly darker on hover */
+            color: #234d6d;
+            border-bottom-color: #a0aec0;
+        }
+
+        .nav-tabs .nav-item .nav-link.active {
+            background-color: #4299e1; /* Active tab color */
+            color: white;
+            border-bottom: 2px solid #4299e1;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .nav-tabs .nav-item:first-child .nav-link{
+            border-radius: 6px 0 0 0;
+        }
+        .nav-tabs .nav-item:last-child .nav-link{
+            border-radius: 0 6px 0 0;
+        }
+
+        .tab-content {
+            background: rgba(255, 255, 255, 0.8); /* Lighter tab content background */
+            padding: 40px;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+            margin-top: -2px; /* Remove extra space above tab content */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        #appointments-list {
+            margin-top: 30px;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        #appointments-list li {
+            background-color: #ffffff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            color: #2c3e50;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #appointments-list li:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #appointments-list li:nth-child(odd) {
+            background-color: #f7fafc; /* Slightly different background for odd items */
+        }
+        #appointments-list li strong{
+            color: #4a5568;
+        }
+          .container {
+            margin-top: 20px;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        .table-title {
+            margin-bottom: 15px;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .table-responsive {
+                overflow-x: scroll;
+            }
+        }
+    </style>
+</head>
+<body>
+      <nav class="navbar">
+      
+        <a href="index.html">
+            <img src="img/Flex-Logo-2.png" alt="Company Logo" class="logo">
+        </a>
+        
+    </nav>
+
+    <div class="container">
+        <h1>Patient Details</h1>
+        <div id="welcome-message" class="alert alert-success" style="display: none;"></div>
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="appointment-tab" data-toggle="tab" href="#appointment" role="tab" aria-controls="appointment" aria-selected="true">Patient Appointment</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="view-appointments-tab" data-toggle="tab" href="#view-appointments" role="tab" aria-controls="view-appointments" aria-selected="false">Appointment View</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="appointment" role="tabpanel" aria-labelledby="appointment-tab">
+                <form id="appointment-form">
+                    
+                    <div class="form-group">
+                        <label for="name">Name  :</label> <input type="text" class="form-control" id="name" readonly required><br>
+
+                <label for="surname">Surname :</label> <input type="text" class="form-control" id="surname" readonly required><br>
+
+                <label for="email">Email :</label> <input type="text" class="form-control" id="email" readonly required><br>
+
+                <label for="phone">Phone  :</label> <input type="text" class="form-control" id="phone" readonly required><br>
+                       <label for="Date">Date of Appointment</label>
+                        <input type="date" class="form-control" id="Date" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Appointment</button>
+                </form>
+            </div>
+
+
+
+ <div class="tab-pane fade" id="view-appointments" role="tabpanel" aria-labelledby="view-appointments-tab">
+            <h2>Appointments</h2>    
+            <ul id="appointments-list" class="list-group">
+    <div class="appointment-update">
+                <h2 class="table-title"><i class="fas fa-user-md"></i> Pending Appointments</h2>
+         <a href="#" id="view-appointments">View Appointments</a>
+
+                 <label for="email">Email :</label> <input type="text" class="form-control" id="pEmail" readonly required><br>
+ 
+              
+        <div id="table-container" data-table="approved-appointments">
+            <h2 class="table-highlight-secondary">Approved Appointments</h2>
+             <div class="table-responsive-md">
+                <table class="table table-bordered table-striped table-hover table-highlight-secondary">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Email</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>doctor</th>
+                            <th>Status</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody id="approved-appointments-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+   </div>
+</div>
+
+<script>
+    // Populate patient details from localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('name').value = localStorage.getItem('patientName') || '';
+        document.getElementById('surname').value = localStorage.getItem('patientSurname') || '';
+        document.getElementById('email').value = localStorage.getItem('patientEmail') || '';
+
+        // Keep the phone visible but not stored
+        document.getElementById('phone').value = localStorage.getItem('patientPhone') || '';
+         document.getElementById('pEmail').value = localStorage.getItem('patientEmail') || '';
+    });
+// ADDING AN APPOINTMENT
+    document.getElementById('appointment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = {
+                name: document.getElementById('name').value,
+                surname: document.getElementById('surname').value,
+                email: document.getElementById('email').value,
+                date: document.getElementById('Date').value
+            };
+
+            fetch('/api/appointments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Appointment submitted successfully!');
+                // Optionally, refresh the appointments list or clear the form
+                document.getElementById('appointment-form').reset();
+            })
+            .catch(error => console.error('Error:', error));
+        });
+//        SHOW PENDING APPOINTMENTS
+document.getElementById('pEmail').value = localStorage.getItem('patientEmail');
+ document.getElementById('view-appointments').addEventListener('click', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('pEmail').value;
+
+            fetch(`/api/approved_appointments/fetch?email=${encodeURIComponent(email)}`)
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('approved-appointments-table-body');
+                    tbody.innerHTML = ''; // Clear previous data
+                    if (data.length > 0) {
+                        const appointment = data[0]; // Get the first appointment
+                        const row = `<tr>
+                                        <td>${appointment.first_name}</td>
+                                        <td>${appointment.last_name}</td>
+                                        <td>${appointment.email}</td>
+                                        <td>${appointment.date}</td>
+                                        <td>${appointment.time}</td>
+                                        <td>${appointment.assigned_doctor}</td>
+                                        <td>${appointment.status}</td>
+                                     </tr>`;
+                        tbody.innerHTML = row;
+                    } else {
+                        tbody.innerHTML = '<tr><td colspan="8" class="text-center">No appointments found.</td></tr>';
+                    }
+                })
+                .catch(error => console.error('Error fetching appointments:', error));
+        });
+
+</script>
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Tables</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            /* Removed background-image, added for sliding images */
+            background-size: cover;
+            animation: slideBackground 15s infinite; /* Added animation */
+            animation-timing-function: linear;
+        }
+        @keyframes slideBackground {
+            0%, 100% { background-image: url(https://flexclinic.org.zw/sitepad-data/uploads/2022/10/CompressJPEG.Online_50kb_33030.jpg); }
+            33% { background-image: url(https://flexclinic.org.zw/sitepad-data/uploads/2022/10/CompressJPEG.Online_50kb_41564.jpg); }
+            66% { background-image: url(https://flexclinic.org.zw/sitepad-data/uploads/2022/10/CompressJPEG.Online_50kb_33842.jpg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #1a202c;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 30px;
+        }
+        .table-bordered {
+            border-color: #e2e8f0;
+        }
+        .table-bordered thead th {
+            background-color: #f7fafc;
+            color: #4a5568;
+            border-bottom-width: 2px;
+            border-color: #e2e8f0;
+        }
+        .table-bordered td {
+            border-color: #edf2f7;
+            color: #2d3748;
+        }
+        .table-bordered th,
+        .table-bordered td {
+            padding: 12px;
+            vertical-align: middle;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            transition: background-color 0.2s ease;
+        }
+
+        /* New styles for improved visualization */
+        .table-highlight-primary thead th {
+            background-color: #68d391;
+            color: white;
+        }
+        .table-highlight-primary tbody tr:nth-of-type(odd) {
+            background-color: #ebf4ed;
+        }
+        .table-highlight-secondary thead th {
+            background-color: #4299e1;
+            color: white;
+        }
+        .table-highlight-secondary tbody tr:nth-of-type(odd) {
+            background-color: #e6f0fa;
+        }
+
+        .table-highlight-accent thead th {
+            background-color: #f56565;
+            color: white;
+        }
+        .table-highlight-accent tbody tr:nth-of-type(odd) {
+            background-color: #fee2e2;
+        }
+
+        .table-highlight-info thead th {
+            background-color: #ecc94b;
+            color: white;
+        }
+        .table-highlight-info tbody tr:nth-of-type(odd){
+            background-color: #fff5eb;
+        }
+
+        .table-highlight-success thead th{
+            background-color: #38a169;
+            color: white;
+        }
+        .table-highlight-success tbody tr:nth-of-type(odd){
+            background-color: #e6fffa;
+        }
+
+        /* Delete button style */
+        .delete-btn {
+            background-color: #f56565;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+        .delete-btn:hover {
+            background-color: #c53030;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 240px;
+            height: 100%;
+            background-color: #f7fafc;
+            border-right: 1px solid #e2e8f0;
+            padding-top: 60px;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-240px);
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu-item {
+            padding: 14px 24px;
+            cursor: pointer;
+            border-bottom: 1px solid #e2e8f0;
+            transition: background-color 0.2s ease;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .sidebar-menu-item:hover {
+            background-color: #edf2f7;
+            color: #2d3748;
+        }
+
+        .sidebar-menu-item.active {
+            background-color: #4299e1;
+            color: white;
+            border-radius: 6px;
+        }
+
+        /* Content area styles */
+        .content-area {
+            margin-left: 240px;
+            padding: 30px;
+            transition: margin-left 0.3s ease;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .content-area.expanded {
+            margin-left: 0;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1001;
+            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-brand {
+            color: #1a202c;
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+
+        .navbar-toggle {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 24px;
+            justify-content: space-between;
+            width: 30px;
+        }
+
+        .navbar-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background-color: #4a5568;
+            border-radius: 3px;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-toggle.active .bar:nth-child(1) {
+            transform: rotate(45deg) translateY(10px);
+        }
+
+        .navbar-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .navbar-toggle.active .bar:nth-child(3) {
+            transform: rotate(-45deg) translateY(-10px);
+        }
+
+        #table-container {
+            display: none;
+        }
+
+        #table-container.active {
+            display: block;
+        }
+
+        /* Added for tab */
+        .nav-tabs {
+            border-bottom: 2px solid #e2e8f0;
+            padding-left: 20px;
+        }
+        .nav-tabs .nav-item {
+            margin-bottom: -2px;
+        }
+        .nav-tabs .nav-link {
+            border: 1px solid transparent;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            padding: 12px 20px;
+            color: #4a5568;
+            font-weight: 500;
+            background-color: transparent;
+            transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+        .nav-tabs .nav-link:hover,
+        .nav-tabs .nav-link:focus {
+            border-color: #e2e8f0 #e2e8f0 #fff;
+            background-color: #edf2f7;
+            color: #2d3748;
+        }
+        .nav-tabs .nav-link.active {
+            color: #fff;
+            background-color: #4299e1;
+            border-color: #4299e1 #4299e1 #fff;
+        }
+        .nav-tabs .nav-item + .nav-item {
+            margin-left: 8px;
+        }
+
+        /* Logo styles */
+        .logo {
+            max-height: 50px; /* Adjust as needed */
+            margin-right: 10px; /* Space between logo and brand text */
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #00336688; /* Dark blue background */
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
+            margin-bottom: 60px; /* Add margin to create space below the header */
+            display: flex; /* Use flexbox to align items */
+            justify-content: center; /* Center content horizontally */
+            align-items: center; /* Center content vertically */
+            gap: 20px; /* Space between the text and logo */
+        }
+        .header h1 {
+            font-size: 2.2rem; /* Larger heading */
+            font-weight: bold;  /* Make the heading bold */
+            margin-bottom: 0; /* Remove default margin */
+        }
+        .header p {
+            font-size: 1.1rem;  /* Slightly larger paragraph text */
+            opacity: 0.8;       /* Reduce opacity for a softer look */
+        }
+        .header img {
+            max-height: 80px; /* Adjust size as needed */
+        }
+
+        /* Content Area Styles */
+        .content-area {
+           margin-top: 0; /* Remove the top margin from content area */
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>FULL LIFE EXPECTANCY</h1>
+        <img src="https://th.bing.com/th/id/OIP.XKdZgJT9MaVBqYDg-5JlvgAAAA?rs=1&pid=ImgDetMain" alt="Company Logo">
+        <p>Through Quality Healthcare</p>
+    </header>
+
+    <nav class="navbar">
+        <button class="navbar-toggle" id="sidebar-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <a href="index.html">
+        <img src="img/Flex-Logo-2.png" alt="Company Logo" class="logo"></a>
+        <span class="navbar-brand">ADMIN</span>
+        <a href="addstaff.html" class="nav-item">ADD STAFF  </a>
+         <a href="providerregister.html" class="nav-item">ADD DOCTOR  </a>
+    </nav>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Tables</h2>
+        </div>
+        <ul class="sidebar-menu" id="sidebar-menu">
+            <li class="sidebar-menu-item" data-table="providers">Health_Care_Providers</li>
+           
+            <li class="sidebar-menu-item" data-table="appointments">Appointments</li>
+            <li class="sidebar-menu-item" data-table="approved-appointments">Approved Appointments</li>
+            <li class="sidebar-menu-item" data-table="cancelled-appointments">Cancelled Appointments</li>
+            <li class="sidebar-menu-item" data-table="patients">Patients</li>
+            <li class="sidebar-menu-item" data-table="staff">Staff</li>
+        </ul>
+    </div>
+
+    <div class="content-area" id="content-area">
+
+        <ul class="nav nav-tabs" id="table-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#providers" data-table="providers">Providers</a>
+            </li>
+    
+            <li class="nav-item">
+                <a class="nav-link" href="#appointments" data-table="appointments">Appointments</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="#approved-appointments" data-table="approved-appointments">Approved Appointments</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#cancelled-appointments" data-table="cancelled-appointments">Cancelled Appointments</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#patients" data-table="patients">Patients</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#staff" data-table="staff">Staff</a>
+            </li>
+        </ul>
+
+        <div id="table-container" data-table="providers">
+            <h2 class="table-highlight-primary">Providers</h2>
+            <div class="table-responsive-md">
+                <table class="table table-bordered table-striped table-hover table-highlight-primary">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Email</th>
+                            <th>Speciality</th>
+                            <th>Availability</th>
+                            <th>Created At</th>
+                            <th>Password</th>
+                        </tr>
+                    </thead>
+                    <tbody id="providers-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div id="table-container" data-table="appointments">
+            <h2 class="table-highlight-secondary">Appointments</h2>
+            <div class="table-responsive-md">
+                <table class="table table-bordered table-striped table-hover table-highlight-secondary">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Email</th>
+                            <th>Date</th>
+                            <th>Created At</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appointments-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="table-container" data-table="approved-appointments">
+            <h2 class="table-highlight-secondary">Approved Appointments</h2>
+             <div class="table-responsive-md">
+                <table class="table table-bordered table-striped table-hover table-highlight-secondary">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Email</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>doctor</th>
+                            <th>Status</th>
+                            <th>Created At</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="approved-appointments-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="table-container" data-table="cancelled-appointments">
+            <h2 class="table-highlight-accent">Cancelled Appointments</h2>
+            <div class="table-responsive-md">
+                <table class="table table-bordered table-striped table-hover table-highlight-accent">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Created At</th>
+                            <th>Appointment ID</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cancelled-appointments-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="table-container" data-table="patients">
+            <h2 class="table-highlight-info">Patients</h2>
+            <div class="table-responsive-md">
+                <table class="table table-bordered table-striped table-hover table-highlight-info">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Phone</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="patients-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="table-container" data-table="staff">
+            <h2 class="table-highlight-success">Staff</h2>
+            <div class="table-responsive-md">
+                <table class="table table-bordered table-striped table-hover table-highlight-success">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Surname</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="staff-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+$(document).ready(function() {
+    const sidebar = $('#sidebar');
+    const contentArea = $('#content-area');
+    const sidebarToggle = $('#sidebar-toggle');
+    const sidebarMenuItems = $('.sidebar-menu-item');
+    const tableContainers = $('#table-container');
+    const navTabs = $('.nav-tabs .nav-link');
+
+    sidebarToggle.on('click', function() {
+        sidebar.toggleClass('collapsed');
+        contentArea.toggleClass('expanded');
+        $(this).toggleClass('active');
+    });
+
+    function fetchData(tableName) {
+        let apiUrl;
+        switch (tableName) {
+            case 'providers':
+                apiUrl = '/api/providers';
+                break;
+            case 'signin':
+                apiUrl = '/api/signin';
+                break;
+            case 'appointments':
+                apiUrl = '/api/appointments';
+                break;
+            case 'approved-appointments':
+                apiUrl = '/api/approved_appointments';
+                break;
+            case 'cancelled-appointments':
+                apiUrl = '/api/cancelled-appointments';
+                break;
+            case 'patients':
+                apiUrl = '/api/patients';
+                break;
+            case 'staff':
+                apiUrl = '/api/staff';
+                break;
+            default:
+                return;
+        }
+
+        $.get(apiUrl, function(data) {
+            populateTable(tableName, data);
+        });
+    }
+
+    function populateTable(tableName, data) {
+        const tableBody = $(`#${tableName}-table-body`);
+        tableBody.empty();
+        data.forEach(item => {
+            let row = '<tr>';
+            for (const key in item) {
+                if (item.hasOwnProperty(key)) {
+                    row += `<td>${item[key]}</td>`;
+                }
+            }
+            row += `<td><button class="delete-btn" data-id="${item.id}" data-table="${tableName}">Delete</button></td>`;
+            row += '</tr>';
+            tableBody.append(row);
+        });
+
+        // Attach delete button event listener
+        attachDeleteButtonEvent();
+    }
+
+    function attachDeleteButtonEvent() {
+        $('.delete-btn').off('click').on('click', function() {
+            const rowId = $(this).data('id');
+            const table = $(this).data('table');
+            let apiEndpoint;
+
+            switch (table) {
+                case 'providers':
+                    apiEndpoint = `/api/providers/${rowId}`;
+                    break;
+                case 'signin':
+                    apiEndpoint = `/api/signin/${rowId}`;
+                    break;
+                case 'appointments':
+                    apiEndpoint = `/api/appointments/${rowId}`;
+                    break;
+                case 'approved-appointments':
+                    apiEndpoint = `/api/approved_appointments/${rowId}`;
+                    break;
+                case 'cancelled-appointments':
+                    apiEndpoint = `/api/cancelled-appointments/${rowId}`;
+                    break;
+                case 'patients':
+                    apiEndpoint = `/api/patients/${rowId}`;
+                    break;
+                case 'staff':
+                    apiEndpoint = `/api/staff/${rowId}`;
+                    break;
+            }
+
+            // AJAX DELETE request
+            $.ajax({
+                url: apiEndpoint,
+                type: 'DELETE',
+                success: function(result) {
+                    console.log(result.message);
+                    // Remove the row from the table
+                    $(this).closest('tr').remove();
+                }.bind(this),
+                error: function(xhr) {
+                    console.error('Error deleting:', xhr.responseText);
+                }
+            });
+        });
+    }
+
+    function showTable(tableName) {
+        tableContainers.removeClass('active');
+        $(`[data-table="${tableName}"]`).addClass('active');
+        fetchData(tableName);
+    }
+
+    sidebarMenuItems.on('click', function() {
+        const tableName = $(this).data('table');
+        sidebarMenuItems.removeClass('active');
+        $(this).addClass('active');
+        showTable(tableName);
+        navTabs.removeClass('active');
+        $(`[href="#${tableName}"]`).addClass('active');
+    });
+
+    navTabs.on('click', function(e) {
+        e.preventDefault();
+        const tableName = $(this).data('table');
+        navTabs.removeClass('active');
+        $(this).addClass('active');
+        sidebarMenuItems.removeClass('active');
+        $(`[data-table="${tableName}"]`).addClass('active');
+        showTable(tableName);
+    });
+
+    // Initialize the first table
+    sidebarMenuItems.first().click();
+});
+</script>
+</body>
+</html>

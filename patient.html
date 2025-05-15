@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLEX Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: block;
+            background-size: cover;
+            animation: slideBackground 15s infinite;
+            animation-timing-function: linear;
+        }
+
+        @keyframes slideBackground {
+            0%, 100% { background-image: url(https://flexclinic.org.zw/sitepad-data/uploads/2022/10/CompressJPEG.Online_50kb_33030.jpg); }
+            33% { background-image: url(https://flexclinic.org.zw/sitepad-data/uploads/2022/10/CompressJPEG.Online_50kb_41564.jpg); }
+            66% { background-image: url(https://th.bing.com/th/id/OIP.JGqEpZx6P-z3g-MCtvqXvAHaEK?rs=1&pid=ImgDetMain); }
+        }
+
+        header {
+            background-color: #00336688;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        header img {
+            max-height: 80px;
+        }
+
+        nav {
+            background-color: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1001;
+            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.08);
+        }
+
+        nav .navbar-brand {
+            color: #1a202c;
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+
+        nav .navbar-toggle {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 24px;
+            justify-content: space-between;
+            width: 30px;
+        }
+
+        nav .navbar-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background-color: #4a5568;
+            border-radius: 3px;
+            transition: transform 0.3s ease;
+        }
+
+        nav .navbar-toggle.active .bar:nth-child(1) {
+            transform: rotate(45deg) translateY(10px);
+        }
+
+        nav .navbar-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        nav .navbar-toggle.active .bar:nth-child(3) {
+            transform: rotate(-45deg) translateY(-10px);
+        }
+.navbar {
+    background-color: #fff;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 15px 0; /* Adjusted padding for vertical centering */
+    display: flex;
+    justify-content: center; /* Center the content */
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1001;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.08);
+}
+        nav .logo {
+            max-height: 50px;
+            margin-right: 10px;
+        }
+
+        nav .navbar-brand div {
+            display: flex;
+        }
+
+        nav .navbar-brand a {
+            color: #555;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav .navbar-brand a:hover {
+            color: #007bff;
+        }
+
+        .container {
+            margin-top: 80px;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            color: #1a202c;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 2.2rem;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            padding: 0.75rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .text-center {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .text-muted {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .footer-hashen {
+            background-color: #e9ecef8c;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #555;
+            border-top: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            .form-group label {
+                font-size: 0.9rem;
+            }
+
+            .form-control {
+                font-size: 1rem;
+                padding: 0.75rem;
+            }
+
+            .btn-primary {
+                font-size: 1rem;
+                padding: 0.75rem 1.5rem;
+            }
+            header h1{
+                font-size: 2rem;
+            }
+            header p{
+                font-size: 0.9rem;
+            }
+        }
+        @media (max-width: 576px){
+            header{
+                padding: 1rem 0.5rem;
+            }
+            header img{
+                max-height: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+      <nav class="navbar">
+      
+        <a href="index.html">
+            <img src="img/Flex-Logo-2.png" alt="Company Logo" class="logo">
+        </a>
+        
+    </nav>
+
+    <header class="header">
+        <h1>FULL LIFE EXPECTANCY</h1>
+        <img src="https://dcassetcdn.com/design_img/3825117/831606/23801150/mng17xdb40ktfwmzp66nxpyz01_image.jpg" alt="Company Logo">
+        <p>Through Quality Healthcare</p>
+    </header>
+
+  
+
+    <div class="container">
+        <h1>Patients Login</h1>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="patientEmail">Email address</label>
+                <input type="email" class="form-control" id="loginEmail" placeholder="Enter your patient email" required>
+            </div>
+            <div class="form-group">
+                <label for="patientPassword">Password</label>
+                <input type="password" class="form-control" id="loginPassword" placeholder="Enter your patient password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+        <p class="text-center">
+            <a href="/patientsgn.html">Forgot Password?</a> | <a href="/patientsgn.html">Create an Account</a>
+        </p>
+    </div>
+
+    <p class="footer-hashen">
+        Flex Clinic is a private multi-departmental medical centre uniquely located in high density suburb of Lobengula.<br>
+        Currently, the clinic is ready to serve with 40 fully equipped beds<br>
+        which can be increased to a maximum capacity of 80 beds
+    </p>
+<script>
+    
+    document.getElementById('loginForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+
+        const response = await fetch('/api/patients', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ Email: email, Password: password })
+        });
+
+        if (response.ok) {
+            const patientData = await response.json(); // Get patient details
+            // Store patient details in localStorage
+            localStorage.setItem('patientName', patientData.name);
+            localStorage.setItem('patientSurname', patientData.surname);
+            localStorage.setItem('patientEmail', patientData.email);
+            localStorage.setItem('patientPhone', patientData.phone);
+            window.location.href = 'appointments.html'; // Redirect to appointments.html
+        } else {
+            const message = await response.text();
+            alert(message); // Display error message
+        }
+    });
+</script>
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

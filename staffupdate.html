@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+ <html lang="en">
+
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STAFF DASHBOARD | FLEX. | FULL LIFE EXPECTANCY</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+   body {
+    background-color: #a2b3c5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 40px;
+    background-image: url('https://media.gettyimages.com/id/871227254/photo/cheerful-female-medical-student-in-the-classroom.jpg?s=612x612&w=gi&k=20&c=f6I_w84fgBZWceWo7u3757mIsL0ESS5zuJ2FfDCsdyI=');
+    background-size: cover;
+    background-position: center;
+   }
+
+   .dashboard-overlay {
+    width: 100%;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(233, 236, 239, 0.8);
+    /* Adjust opacity as needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 40px;
+    padding-bottom: 40px;
+   }
+
+   .dashboard-container {
+    width: 95%;
+    max-width: 1400px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    margin-bottom: 30px;
+    /* Add some margin at the bottom */
+   }
+
+   h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #28a745;
+    font-weight: bold;
+   }
+
+   .table-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+    overflow-x: auto;
+    /* Enable horizontal scrolling for small screens */
+   }
+
+   .appointments-table,
+   .doctors-table {
+    flex: 1;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+   }
+
+   .table-title {
+    font-size: 20px;
+    color: #343a40;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-align: center;
+   }
+
+   .table thead th {
+    background-color: #007bff;
+    color: white;
+    border-bottom: 2px solid #0056b3;
+    padding: 10px;
+    font-weight: normal;
+    text-align: left;
+   }
+
+   .table tbody td {
+    color: #495057;
+    padding: 8px;
+    border-bottom: 1px solid #dee2e6;
+   }
+
+   .table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+   }
+
+   .update-btn {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #212529;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+   }
+
+   .update-btn:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+   }
+
+   .form-section {
+    background-color: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+   }
+
+   .form-section h3 {
+    color: #343a40;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+   }
+
+   .form-group {
+    margin-bottom: 20px;
+   }
+
+   label {
+    font-weight: bold;
+    color: #495057;
+    display: block;
+    margin-bottom: 5px;
+   }
+
+   .form-control {
+    height: 40px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+   }
+
+   .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+   }
+
+   .checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+   }
+
+   .checkbox-group label {
+    margin-right: 15px;
+    font-weight: normal;
+   }
+
+   .form-check {
+    margin-left: 20px;
+   }
+
+   .btn-primary {
+    width: 100%;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+   }
+
+   .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+   }
+
+   .table-responsive {
+    overflow-x: auto;
+   }
+
+   /* Responsive adjustments */
+   @media (max-width: 992px) {
+    .table-container {
+     flex-direction: column;
+     gap: 30px;
+    }
+
+    .appointments-table,
+    .doctors-table {
+     width: 100%;
+    }
+
+    .dashboard-container {
+     padding: 20px;
+    }
+
+    .form-section {
+     padding: 20px;
+    }
+   }
+  </style>
+ </head>
+
+ <body>
+  
+<div class="dashboard-overlay">
+    <div class="dashboard-container">
+        <h2>STAFF DASHBOARD</h2>
+
+        <div class="table-container">
+            <div class="appointments-table">
+                <h2 class="table-title"><i class="fas fa-calendar-check"></i> Patient Appointments</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Surname</th>
+                                <th>Email</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="appointments-list"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="doctors-table">
+                <h2 class="table-title"><i class="fas fa-user-md"></i> Doctor Details</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Surname</th>
+                                <th>Email</th>
+                                <th>Specialty</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="doctors-list"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3>Book New Appointment</h3>
+            <div class="form-group">
+                <label for="name"><i class="fas fa-user"></i> Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter Name" readonly>
+            </div>
+            <div class="form-group">
+                <label for="surname"><i class="fas fa-user-tag"></i> Surname</label>
+                <input type="text" class="form-control" id="surname" placeholder="Enter Surname" readonly>
+            </div>
+            <div class="form-group">
+                <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter Email" readonly>
+            </div>
+            <div class="form-group">
+                <label for="date"><i class="fas fa-calendar-alt"></i> Date</label>
+                <input type="date" class="form-control" id="date">
+            </div>
+            <div class="form-group">
+                <label for="time"><i class="fas fa-clock"></i> Time</label>
+                <input type="time" class="form-control" id="time">
+            </div>
+            <div class="form-group">
+                <label for="doctor"><i class="fas fa-user-md"></i> Doctor</label>
+                <input type="text" class="form-control" id="doctor" placeholder="Enter Doctor's Name">
+            </div>
+            <div class="form-group">
+                <label for="status"><i class="fas fa-user-md"></i> Accepted or Declined</label>
+                <select class="form-control" id="status">
+                    <option value="accepted">Accepted</option>
+                    <option value="declined">Declined</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" id="enter-button">
+                <i class="fas fa-plus-circle"></i> Approve Appointment
+            </button>
+        </div>
+    </div>
+</div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    const enterButton = document.getElementById('enter-button');
+
+    enterButton.addEventListener('click', function() {
+        // Get the values from the form fields
+        const name = document.getElementById('name').value;
+        const surname = document.getElementById('surname').value;
+        const email = document.getElementById('email').value;
+        const date = document.getElementById('date').value;
+        const time = document.getElementById('time').value;
+        const doctor = document.getElementById('doctor').value;
+        const status = document.getElementById('status').value;
+
+        // Basic validation
+        if (!name || !surname || !email || !date || !time || !doctor) {
+            alert('Please fill in all fields.');
+            return;
+        }
+
+        // Create the data object to send to the server
+        const appointmentData = {
+            name,
+            surname,
+            email,
+            date,
+            time,
+            doctor,
+            status
+        };
+
+        // Send data to the server
+        fetch('/api/approved_appointments/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(appointmentData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert('Appointment added successfully!');
+            // Clear form fields
+            document.getElementById('name').value = '';
+            document.getElementById('surname').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('date').value = '';
+            document.getElementById('time').value = '';
+            document.getElementById('doctor').value = '';
+            document.getElementById('status').value = 'accepted'; // Reset to default value
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Appointment created successfully.');
+        });
+    });
+});
+
+// Function to fetch appointments
+const appointmentsList = document.getElementById('appointments-list');
+
+function fetchAppointments() {
+    fetch('http://localhost:8080/api/appointments')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            appointmentsList.innerHTML = ''; // Clear the table
+            data.forEach(appointment => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${appointment.name}</td>
+                    <td>${appointment.surname}</td>
+                    <td>${appointment.email}</td>
+                    <td>${appointment.date}</td>
+                    <td><button class="btn btn-warning update-btn"><i class="fas fa-edit"></i> Update</button></td>
+                `;
+                appointmentsList.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching appointments:', error);
+            alert('Failed to fetch appointments. Please try again later.'); // User feedback
+        });
+}
+$(document).ready(function () {
+    // Update button functionality for patient appointments
+    $('.appointments-table').on('click', '.update-btn', function () {
+        var row = $(this).closest('tr');
+        $('#name').val(row.find('td:eq(0)').text());
+        $('#surname').val(row.find('td:eq(1)').text());
+        $('#email').val(row.find('td:eq(2)').text());
+        
+    });
+});
+
+
+    // Fetch initial data
+    fetchAppointments();
+
+    const doctorsList = document.getElementById('doctors-list');
+
+    function fetchDoctors() {
+        fetch('http://localhost:8080/api/providers')
+            .then(response => response.json())
+            .then(data => {
+                doctorsList.innerHTML = ''; // Clear the table
+                data.forEach(doctor => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${doctor.name}</td>
+                        <td>${doctor.surname}</td>
+                        <td>${doctor.email}</td>
+                        <td>${doctor.speciality}</td>
+                        <td>${doctor.availability}</td>
+                    `;
+                    doctorsList.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error fetching doctors:', error));
+    }
+
+    fetchDoctors();
+  </script>
+ </body>
+
+ </html>

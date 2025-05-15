@@ -1,0 +1,16 @@
+login page (patint or staff)
+patience signup save to database
+staff(receptionist or other staff)
+in staff 
+
+login 1-patients(email , PASSWORD)
+        staffs(email , PASSWORD)
+        rcpnts(email , PASSWORD)
+
+login = RECEPTION 
+REGISTER = OTHER STAFF
+PATIENT (SIGNUP FORM)=>NAME, SURNAME ,EMAIL ,PHONE NUMBER(NUMBERS), PASSWORD
+RECEPTIONIST => EMAIL , PASSWORD
+staffs=>EMAIL , PASSWORD(same form dffrnt functions)
+
+PATIENT

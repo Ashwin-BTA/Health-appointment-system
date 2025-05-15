@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider Registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #a1c4fd29, #c2e9fb3c),url(https://flexclinic.org.zw/sitepad-data/uploads/2022/10/CompressJPEG.Online_50kb_33030.jpg);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .registration-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem; /* Reduced padding */
+            border-radius: 0.8rem; /* Slightly reduced border-radius */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Slightly reduced shadow */
+            width: 90%; /* Increased width for better responsiveness */
+            max-width: 400px; /* Reduced maximum width */
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem; /* Reduced margin */
+        }
+
+        .logo-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px; /* Reduced gap */
+            margin-bottom: 0.8rem; /* Reduced margin */
+        }
+
+        .logo-header img {
+            max-height: 40px; /* Reduced logo size */
+        }
+
+        .logo-header h1 {
+            font-size: 1.6rem; /* Reduced font size */
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1rem; /* Reduced margin */
+        }
+
+        .form-group label {
+            font-weight: 500; /* Slightly reduced font weight */
+            color: #555;
+            display: block;
+            margin-bottom: 0.3rem; /* Reduced margin */
+            font-size: 0.9rem; /* Reduced font size */
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 0.4rem; /* Reduced border-radius */
+            padding: 0.6rem; /* Reduced padding */
+            font-size: 0.9rem; /* Reduced font size */
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            padding: 0.8rem 1.5rem; /* Reduced padding */
+            font-size: 1rem; /* Reduced font size */
+            border: none;
+            border-radius: 0.4rem; /* Reduced border-radius */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            display: block;
+            margin-top: 0.8rem; /* Reduced margin */
+            font-weight: 400; /* Reduced font weight */
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .footer-hashen {
+            text-align: center;
+            margin-top: 1.5rem; /* Reduced margin */
+            font-size: 0.8rem; /* Reduced font size */
+            color: #777;
+        }
+
+        /* Orientation adjustments for smaller screens */
+        @media (max-width: 576px) {
+            .registration-container {
+                padding: 1.5rem;
+                border-radius: 0.6rem;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .logo-header img {
+                max-height: 30px;
+            }
+
+            .logo-header h1 {
+                font-size: 1.4rem;
+            }
+
+            .form-group {
+                margin-bottom: 0.8rem;
+            }
+
+            .form-group label {
+                font-size: 0.85rem;
+                margin-bottom: 0.2rem;
+            }
+
+            .form-control {
+                padding: 0.5rem;
+                font-size: 0.85rem;
+                border-radius: 0.3rem;
+            }
+
+            .btn-primary {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+                border-radius: 0.3rem;
+                margin-top: 0.6rem;
+            }
+
+            .footer-hashen {
+                margin-top: 1rem;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <header>
+            <div class="logo-header">
+                <img src="img/Flex-Logo-2.png" alt="Company Logo">
+                <h1>Provider Registration</h1>
+            </div>
+            <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 0.5rem;">Please fill out the form below to register.</p>
+        </header>
+        <form id="providerForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="Name" placeholder="Your first name" required>
+            </div>
+            <div class="form-group">
+                <label for="surname">Surname</label>
+                <input type="text" class="form-control" id="Surname" placeholder="Your last name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="Email" placeholder="Your email address" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="Password" placeholder="Enter password" required>
+            </div>
+            <div class="form-group">
+                <label for="speciality">Speciality</label>
+                <input type="text" class="form-control" id="Speciality" placeholder="Your medical speciality" required>
+            </div>
+            <div class="form-group">
+                <label for="availability">Availability</label>
+                <input type="text" class="form-control" id="Availability" placeholder="Your availability" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+        <p class="footer-hashen">
+            Flex Clinic - Quality Healthcare for All.
+        </p>
+    </div>
+
+    <script>
+      
+
+ document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('providerForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+    
+                const name = document.getElementById('Name').value.trim();
+                const surname = document.getElementById('Surname').value.trim();
+                const email = document.getElementById('Email').value.trim();
+                const password = document.getElementById('Password').value;
+                const speciality = document.getElementById('Speciality').value.trim();
+                const availability = document.getElementById('Availability').value.trim();
+                // Validate inputs before sending
+                if (!name || !surname || !email || password.length < 6 || !speciality || !availability) {
+                    alert('Please fill in all fields correctly.');
+                    return;
+                }
+
+                // Send data to the API for registration
+                fetch('/api/provider/register', {
+                 method: 'POST', // Ensure this is POST
+                 headers: {
+                 'Content-Type': 'application/json'
+                 },
+                  body: JSON.stringify({
+                   Email: email,
+                    Password: password,
+                   Name: name,
+                  Surname: surname,
+                 Speciality: speciality,
+                   Availability: availability,
+               })
+         })
+                
+                .then(response => {
+                    if (response.ok) {
+                        return response.text(); // Handle success response
+                    } else if (response.status === 409) {
+                        return response.text().then(text => {
+                            alert(text); // Notify user that email is taken
+                            throw new Error(text); // Throw error to avoid further processing
+                        });
+                    } else {
+                        throw new Error('Network response was not ok: ' + response.statusText);
+                    }
+                })
+                .then(message => {
+                    alert(message); // Show success message
+                    window.location.href = '/admin.html'; // Redirect on success
+                })
+                .catch(error => {
+                    // Handle any other errors
+                    alert('An error occurred: ' + error.message);
+                    console.error('Error:', error); // Log error to console for debugging
+                });
+            });
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

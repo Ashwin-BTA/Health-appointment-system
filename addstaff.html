@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Sign Up</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/indx.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .signup-container {
+            background-color: rgba(14, 14, 20, 0.5);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .signup-heading {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #007bff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.703);
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            width: 100%;
+        }
+
+        .mt-3 {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .mt-3 a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .mt-3 a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2 class="signup-heading">Add Staff</h2>
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="Name">Name</label>
+                <input type="text" class="form-control" id="Name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="Surname">Surname</label>
+                <input type="text" class="form-control" id="Surname" placeholder="Enter your surname" required>
+            </div>
+            <div class="form-group">
+                <label for="Email">Email address</label>
+                <input type="email" class="form-control" id="Email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="Password">Password</label>
+                <input type="password" class="form-control" id="Password" placeholder="Enter your password" required minlength="6">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('signupForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+    
+                const name = document.getElementById('Name').value.trim();
+                const surname = document.getElementById('Surname').value.trim();
+                const email = document.getElementById('Email').value.trim();
+                const password = document.getElementById('Password').value;
+
+                // Validate inputs before sending
+                if (!name || !surname || !email || password.length < 6) {
+                    alert('Please fill in all fields correctly.');
+                    return;
+                }
+
+                // Simple email format validation
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+    
+                // Send data to the API for registration
+                fetch('/api/staff/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        Email: email,
+                        Password: password,
+                        Name: name,
+                        Surname: surname,
+                    })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text(); // Handle success response
+                    } else if (response.status === 409) {
+                        return response.text().then(text => {
+                            alert(text); // Notify user that email is taken
+                            throw new Error(text); // Throw error to avoid further processing
+                        });
+                    } else {
+                        throw new Error('Network response was not ok: ' + response.statusText);
+                    }
+                })
+                .then(message => {
+                    alert(message); // Show success message
+                    window.location.href = '/admin.html'; // Redirect on success
+                })
+                .catch(error => {
+                    // Handle any other errors
+                    alert('An error occurred: ' + error.message);
+                    console.error('Error:', error); // Log error to console for debugging
+                });
+            });
+        });
+    </script>
+</body>
+</html>
