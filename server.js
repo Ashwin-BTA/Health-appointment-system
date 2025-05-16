@@ -6,7 +6,7 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = 3000;
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
