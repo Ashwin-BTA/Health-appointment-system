@@ -409,3 +409,5 @@ app.put('/api/providers/:id/availability', updateProviderAvailability);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+server.keepAliveTimeout = 120000; // 120 seconds
+server.headersTimeout = 120000; // 120 seconds
